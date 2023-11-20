@@ -87,6 +87,7 @@ footer{
 
 #instructions {
   @include popup-style;
+  display: none;
 
   li {
     margin-left: 40px;
