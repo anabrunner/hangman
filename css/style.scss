@@ -19,13 +19,21 @@ $ivory: #FBFFF1;
   text-align: center;
 }
 
+@mixin flex-layout-spacing {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+}
+
 @mixin button-style {
   background-color: $light-blue;
   color: $dark-blue;
   border: $dark-blue;
   font-weight: bold;
-  padding: 10px;
+  padding: 5px 10px;
   border-radius: 10px;
+  font-family: $body-font;
+  font-size: 20rem;
 }
 
 @mixin button-style-hover {
@@ -69,7 +77,7 @@ body {
 header {
   @include layout-style;
   font-family: $heading-font;
-  font-size: 50px
+  font-size: 50rem;
 }
 
 main {
@@ -121,6 +129,19 @@ button:hover {
 }
 
 .buttons {
-  display: flex;
-  justify-content: space-around;
+  @include flex-layout-spacing;
+}
+
+#word {
+  @include flex-layout-spacing;
+
+  div {
+    border-bottom: 3px solid black;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+#hint {
+  text-align: center;
 }
