@@ -24,7 +24,8 @@ $ivory: #FBFFF1;
   color: $dark-blue;
   border: $dark-blue;
   font-weight: bold;
-  box-shadow: 10px 5px 5px gray;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 @mixin button-style-hover {
@@ -71,6 +72,14 @@ header {
   font-size: 50px
 }
 
+main {
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
 footer{
   @include layout-style;
 
@@ -101,9 +110,17 @@ footer{
 
 #closeInstructions {
   @include close-popup;
+}
+
+button {
   @include button-style;
 }
 
-#closeInstructions:hover {
-  @include button-style-hover;
+button:hover {
+  @include button-style-hover()
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
 }

@@ -20,6 +20,14 @@ header {
   font-size: 50px;
 }
 
+main {
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
 footer {
   padding: 10px;
   background-color: #2C2C54;
@@ -65,14 +73,23 @@ footer img:hover {
   right: -5px;
   border-radius: 50%;
   padding: 5px;
+}
+
+button {
   background-color: #B4C5E4;
   color: #2C2C54;
   border: #2C2C54;
   font-weight: bold;
-  box-shadow: 10px 5px 5px gray;
+  padding: 10px;
+  border-radius: 10px;
 }
 
-#closeInstructions:hover {
+button:hover {
   background-color: #2C2C54;
   color: #FBFFF1;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
 }
