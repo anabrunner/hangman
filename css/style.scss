@@ -19,6 +19,42 @@ $ivory: #FBFFF1;
   text-align: center;
 }
 
+@mixin button-style {
+  background-color: $light-blue;
+  color: $dark-blue;
+  border: $dark-blue;
+  font-weight: bold;
+  box-shadow: 10px 5px 5px gray;
+}
+
+@mixin button-style-hover {
+  background-color: $dark-blue;
+  color: $ivory;
+}
+
+@mixin popup-style {
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+  background-color: $dark-blue;
+  color: $ivory;
+  padding: 20px;
+  border-radius: 10px;
+  border: 5px solid $light-blue;
+  box-shadow: 10px 5px 5px gray;
+}
+
+@mixin close-popup {
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  border-radius: 50%;
+  padding: 5px;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -37,7 +73,7 @@ header {
 
 footer{
   @include layout-style;
-  
+
   img {
     width: 15px;
     height: auto;
@@ -47,4 +83,26 @@ footer{
     transform: rotate(360deg);
     transition: 1s;
   }
+}
+
+#instructions {
+  @include popup-style;
+
+  li {
+    margin-left: 40px;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: $heading-font;
+  }
+}
+
+#closeInstructions {
+  @include close-popup;
+  @include button-style;
+}
+
+#closeInstructions:hover {
+  @include button-style-hover;
 }

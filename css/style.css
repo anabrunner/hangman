@@ -35,3 +35,43 @@ footer img:hover {
   transform: rotate(360deg);
   transition: 1s;
 }
+
+#instructions {
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+  background-color: #2C2C54;
+  color: #FBFFF1;
+  padding: 20px;
+  border-radius: 10px;
+  border: 5px solid #B4C5E4;
+  box-shadow: 10px 5px 5px gray;
+}
+#instructions li {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+#instructions h1 {
+  font-family: "Permanent Marker", cursive;
+}
+
+#closeInstructions {
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  border-radius: 50%;
+  padding: 5px;
+  background-color: #B4C5E4;
+  color: #2C2C54;
+  border: #2C2C54;
+  font-weight: bold;
+  box-shadow: 10px 5px 5px gray;
+}
+
+#closeInstructions:hover {
+  background-color: #2C2C54;
+  color: #FBFFF1;
+}
