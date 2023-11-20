@@ -4,7 +4,7 @@
 
 /* Font for headings */
 @font-face {
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Permanent Marker';
   src: url('../fonts/Permanent_Marker/PermanentMarker-Regular.ttf');
   font-weight: normal;
   font-style: normal;
@@ -12,7 +12,7 @@
 
 /* Font for body text */
 @font-face {
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Indie Flower';
   src: url('../fonts/Indie_Flower/IndieFlower-Regular.ttf');
   font-weight: normal;
   font-style: normal;

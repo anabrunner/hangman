@@ -2,3 +2,49 @@
 
 // Fonts used and reset CSS to normalize across browsers
 @import "fonts.css", "reset.css";
+
+// Variables for styles
+$heading-font: 'Permanent Marker', cursive;
+$body-font: 'Indie Flower', cursive;
+$dark-blue: #2C2C54;
+$light-blue: #B4C5E4;
+$ivory: #FBFFF1;
+
+// Mixins
+@mixin layout-style {
+  padding: 10px;
+  background-color: $dark-blue;
+  color: $ivory;
+  width: 100%;
+  text-align: center;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-family: $body-font;
+  background-color: $light-blue;
+  min-height: 100vh;
+}
+
+header {
+  @include layout-style;
+  font-family: $heading-font;
+  font-size: 50px
+}
+
+footer{
+  @include layout-style;
+  
+  img {
+    width: 15px;
+    height: auto;
+  }
+
+  img:hover {
+    transform: rotate(360deg);
+    transition: 1s;
+  }
+}
