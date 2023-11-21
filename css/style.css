@@ -129,8 +129,10 @@ button:hover {
 }
 #word div {
   border-bottom: 3px solid black;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
+  font-family: "Permanent Marker", cursive;
+  font-size: 25rem;
 }
 
 #hint {

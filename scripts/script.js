@@ -12,6 +12,7 @@ const $closeInstructionsBtn = $('#closeInstructions');
 const fetchWordURL = 'https://www.wordgamedb.com/api/v1/words/random';
 let playerScore;
 let gameOver;
+let currentWord;
 
 $howToPlayBtn.click(() => $instructions.show(300));
 $closeInstructionsBtn.click(() => $instructions.hide(300));
@@ -52,9 +53,9 @@ function getRandomWord(){
     })
     .then(function(data){
       console.log(data.word);
-      console.log(data.word.length);
+      currentWord = data.word.toUpperCase();
       $hintDiv.text(`HINT: ${data.category} - ${data.hint}`);
-      makeWordDiv(data.word);
+      makeWordDiv(currentWord);
     })
     .catch(function(){
       console.log('Catch fetch error');
@@ -75,5 +76,24 @@ function updateScore(score){
 };
 
 function makeGuess(){
-  console.log($(this).attr('id'));
+  let guess = $(this).attr('id');
+  let matches = [];
+  for (let i = 0; i < currentWord.length; i++){
+    if (currentWord[i] === guess) {
+      matches.push(i);
+    }
+  }
+  $(this).addClass('disabled');
+  $(this).prop('disabled', true);
+  updateWordDiv(matches, guess);
+};
+
+function updateWordDiv(arrayOfMatches, letter){
+  if (arrayOfMatches.length === 0){
+    console.log("wrong guess");
+  } else {
+    for (let i = 0; i < arrayOfMatches.length; i++){
+      $(`#word div:nth-child(${arrayOfMatches[i] + 1})`).text(`${letter}`);
+    }
+  }
 };
