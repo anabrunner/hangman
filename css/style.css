@@ -26,6 +26,8 @@ main {
   display: flex;
   flex-direction: column;
   padding: 20px;
+  max-width: 400px;
+  margin: 20px;
 }
 
 footer {
@@ -42,6 +44,14 @@ footer img {
 footer img:hover {
   transform: rotate(360deg);
   transition: 1s;
+}
+
+#letterKeys {
+  display: flex;
+  flex-flow: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px;
 }
 
 #instructions {
