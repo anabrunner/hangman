@@ -22,6 +22,8 @@ $ivory: #FBFFF1;
 @mixin flex-layout-spacing {
   display: flex;
   justify-content: space-around;
+  gap: 10px;
+  width: 100%;
   margin: 10px;
 }
 
@@ -47,7 +49,7 @@ $ivory: #FBFFF1;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  max-width: 400px;
+  max-width: 350px;
   background-color: $dark-blue;
   color: $ivory;
   padding: 20px;
@@ -85,8 +87,9 @@ main {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 20px;
-  max-width: 400px;
+  max-width: 500px;
   margin: 20px;
 }
 
@@ -102,6 +105,12 @@ footer{
     transform: rotate(360deg);
     transition: 1s;
   }
+}
+
+#hangmanImg {
+  max-width: 330px;
+  height: auto;
+  margin-top: 10px;
 }
 
 #letterKeys {
@@ -142,6 +151,10 @@ button:hover {
   @include flex-layout-spacing;
 }
 
+#score {
+  font-size: 30rem;
+}
+
 #word {
   @include flex-layout-spacing;
 
@@ -154,4 +167,9 @@ button:hover {
 
 #hint {
   text-align: center;
+}
+
+.disabled, .disabled:hover {
+  background-color: gray;
+  color: $ivory;
 }

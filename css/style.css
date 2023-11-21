@@ -25,8 +25,9 @@ main {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 20px;
-  max-width: 400px;
+  max-width: 500px;
   margin: 20px;
 }
 
@@ -46,6 +47,12 @@ footer img:hover {
   transition: 1s;
 }
 
+#hangmanImg {
+  max-width: 330px;
+  height: auto;
+  margin-top: 10px;
+}
+
 #letterKeys {
   display: flex;
   flex-flow: wrap;
@@ -60,7 +67,7 @@ footer img:hover {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  max-width: 400px;
+  max-width: 350px;
   background-color: #2C2C54;
   color: #FBFFF1;
   padding: 20px;
@@ -104,12 +111,20 @@ button:hover {
 .buttons {
   display: flex;
   justify-content: space-around;
+  gap: 10px;
+  width: 100%;
   margin: 10px;
+}
+
+#score {
+  font-size: 30rem;
 }
 
 #word {
   display: flex;
   justify-content: space-around;
+  gap: 10px;
+  width: 100%;
   margin: 10px;
 }
 #word div {
@@ -120,4 +135,9 @@ button:hover {
 
 #hint {
   text-align: center;
+}
+
+.disabled, .disabled:hover {
+  background-color: gray;
+  color: #FBFFF1;
 }

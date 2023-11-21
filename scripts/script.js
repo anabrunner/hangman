@@ -2,29 +2,45 @@
 
 const $howToPlayBtn = $('#howToPlayBtn');
 const $newGameBtn = $('#newGameBtn');
+const $scoreDiv = $('#score');
 const $hangmanImg = $('#hangmanImg');
 const $wordDiv = $('#word');
 const $hintDiv = $('#hint');
-const $scoreDiv = $('#score');
 const $letterKeys = $('#letterKeys');
 const $instructions = $('#instructions');
 const $closeInstructionsBtn = $('#closeInstructions');
 const fetchWordURL = 'https://www.wordgamedb.com/api/v1/words/random';
+let playerScore;
+let gameOver;
 
 $howToPlayBtn.click(() => $instructions.show(300));
 $closeInstructionsBtn.click(() => $instructions.hide(300));
-$newGameBtn.click(getRandomWord);
-
-makeLetterKeys();
+$newGameBtn.click(startGame);
 
 // Creates buttons for letters
+makeLetterKeys();
+$letterKeys.children().each(function(){
+  $(this).click(makeGuess);
+});
+
 function makeLetterKeys(){
   let i = 65;
   while (i <= 90){
     let letter = String.fromCharCode(i);
-    $letterKeys.append(`<button id="${letter}">${letter}</button>`);
+    $letterKeys.append(`<button class="disabled" id="${letter}" disabled>${letter}</button>`);
     i++;
   }
+};
+
+function startGame(){
+  gameOver = false;
+  playerScore = 0;
+  updateScore(playerScore);
+  $letterKeys.children().each(function(){
+    $(this).removeClass('disabled');
+    $(this).prop('disabled', false);
+  });
+  getRandomWord();
 };
 
 function getRandomWord(){
@@ -52,4 +68,12 @@ function makeWordDiv(word){
     const $letterDiv = $('<div></div>');
     $wordDiv.append($letterDiv);
   }
+};
+
+function updateScore(score){
+  $scoreDiv.text(`SCORE: ${score}`);
+};
+
+function makeGuess(){
+  console.log($(this).attr('id'));
 };
