@@ -11,7 +11,7 @@ const $instructions = $('#instructions');
 const $closeInstructionsBtn = $('#closeInstructions');
 const fetchWordURL = 'https://www.wordgamedb.com/api/v1/words/random';
 let playerScore;
-let gameOver;
+let incorrectGuesses;
 let currentWord;
 
 $howToPlayBtn.click(() => $instructions.show(300));
@@ -34,9 +34,10 @@ function makeLetterKeys(){
 };
 
 function startGame(){
-  gameOver = false;
   playerScore = 0;
+  incorrectGuesses = 0;
   updateScore(playerScore);
+  $hangmanImg.attr('src', 'images/drawing/hangman-1');
   $letterKeys.children().each(function(){
     $(this).removeClass('disabled');
     $(this).prop('disabled', false);
@@ -90,10 +91,21 @@ function makeGuess(){
 
 function updateWordDiv(arrayOfMatches, letter){
   if (arrayOfMatches.length === 0){
-    console.log("wrong guess");
+    incorrectGuesses++;
+    $hangmanImg.attr('src', `images/drawing/hangman-${incorrectGuesses + 1}`);
+    if (incorrectGuesses === 6){
+      gameOver();
+    }
   } else {
     for (let i = 0; i < arrayOfMatches.length; i++){
       $(`#word div:nth-child(${arrayOfMatches[i] + 1})`).text(`${letter}`);
     }
   }
+};
+
+function gameOver(){
+  $letterKeys.children().each(function(){
+    $(this).addClass('disabled');
+    $(this).prop('disabled', true);
+  });
 };
