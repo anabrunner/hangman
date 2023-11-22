@@ -22,6 +22,7 @@ $ivory: #FBFFF1;
 @mixin flex-layout-spacing {
   display: flex;
   justify-content: space-around;
+  flex: 1;
   gap: 10px;
   width: 100%;
   margin: 10px;
@@ -55,10 +56,7 @@ $ivory: #FBFFF1;
 }
 
 @mixin close-popup {
-  position: absolute;
-  top: -10px;
-  right: -5px;
-  border-radius: 50%;
+  align-self: center;
   padding: 5px;
 }
 
@@ -83,6 +81,7 @@ main {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  flex-shrink: 1;
   align-items: center;
   padding: 20px;
   max-width: 500px;
@@ -108,9 +107,11 @@ h1 {
 }
 
 #hangmanImg {
+  width: 100%;
   max-width: 330px;
   height: auto;
   margin-top: 10px;
+  flex-shrink: 1;
 }
 
 #letterKeys {
@@ -123,10 +124,13 @@ h1 {
 
 .popupDiv {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  max-width: 350px;
+  max-width: 450px;
   background-color: $dark-blue;
   opacity: 1;
   color: $ivory;
@@ -197,4 +201,21 @@ button:hover {
 .disabled, .disabled:hover {
   background-color: gray;
   color: $ivory;
+}
+
+@media screen and (max-width:500px) {
+  .popupDiv {
+    position: static;
+    transform: none;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  #gameOverPopup {
+    div {
+      margin-top: 50%;
+      height: auto;
+    }
+  }
 }
