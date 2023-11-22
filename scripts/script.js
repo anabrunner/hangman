@@ -58,7 +58,6 @@ function getRandomWord(){
       }
     })
     .then(function(data){
-      console.log(data.word);
       currentWord = data.word.toUpperCase();
       $hintDiv.text(`HINT: ${data.category} - ${data.hint}`);
       makeWordDiv(currentWord);
@@ -91,10 +90,10 @@ function makeGuess(){
   }
   $(this).addClass('disabled');
   $(this).prop('disabled', true);
-  updateWordDiv(matches, guess);
+  validateGuess(matches, guess);
 };
 
-function updateWordDiv(arrayOfMatches, letter){
+function validateGuess(arrayOfMatches, letter){
   if (arrayOfMatches.length === 0){
     incorrectGuesses++;
     $hangmanImg.attr('src', `images/drawing/hangman-${incorrectGuesses + 1}`);
@@ -105,7 +104,16 @@ function updateWordDiv(arrayOfMatches, letter){
     for (let i = 0; i < arrayOfMatches.length; i++){
       $(`#word div:nth-child(${arrayOfMatches[i] + 1})`).text(`${letter}`);
     }
-  }
+    if (!$wordDiv.children().is(':empty')){
+      playerScore++;
+      updateScore(playerScore);
+      $letterKeys.children().each(function(){
+        $(this).removeClass('disabled');
+        $(this).prop('disabled', false);
+      });
+      getRandomWord();
+    };
+  };
 };
 
 function gameOver(){
