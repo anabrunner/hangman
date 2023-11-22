@@ -11,6 +11,7 @@ const $instructions = $('#instructions');
 const $closeInstructionsBtn = $('#closeInstructions');
 const $gameOver = $('#gameOverPopup');
 const $finalScore = $('#finalScore');
+const $correctWord = $('#correctWord');
 const $playAgainBtn = $('#playAgain');
 const fetchWordURL = 'https://www.wordgamedb.com/api/v1/words/random';
 let playerScore;
@@ -21,6 +22,11 @@ $howToPlayBtn.click(() => $instructions.fadeIn(300));
 $closeInstructionsBtn.click(() => $instructions.fadeOut(300));
 $newGameBtn.click(startGame);
 $playAgainBtn.click(startGame);
+
+$(window).keypress(function(e){
+  let buttonID = String.fromCharCode(e.which).toUpperCase();
+  $(`#${buttonID}`).click();
+});
 
 // Creates buttons for letters
 makeLetterKeys();
@@ -121,6 +127,7 @@ function gameOver(){
     $(this).addClass('disabled');
     $(this).prop('disabled', true);
   });
+  $correctWord.text(`The correct word was ${currentWord}.`);
   $finalScore.text(`Final score: ${playerScore}`);
   $gameOver.fadeIn(300);
 };
