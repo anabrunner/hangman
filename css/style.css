@@ -12,7 +12,7 @@ body {
 
 header {
   padding: 10px;
-  background-color: #2C2C54;
+  background-color: #2B2B54;
   color: #FBFFF1;
   width: 100%;
   text-align: center;
@@ -33,7 +33,7 @@ main {
 
 footer {
   padding: 10px;
-  background-color: #2C2C54;
+  background-color: #2B2B54;
   color: #FBFFF1;
   width: 100%;
   text-align: center;
@@ -45,6 +45,10 @@ footer img {
 footer img:hover {
   transform: rotate(360deg);
   transition: 1s;
+}
+
+h1 {
+  font-family: "Permanent Marker", cursive;
 }
 
 #hangmanImg {
@@ -61,27 +65,34 @@ footer img:hover {
   margin: 10px;
 }
 
-#instructions {
-  position: fixed;
-  z-index: 1000;
+.popupDiv {
+  position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   max-width: 350px;
-  background-color: #2C2C54;
+  background-color: #2B2B54;
+  opacity: 1;
   color: #FBFFF1;
   padding: 20px;
   border-radius: 10px;
   border: 5px solid #B4C5E4;
   box-shadow: 10px 5px 5px gray;
+}
+
+#instructions {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(43, 43, 84, 0.8);
   display: none;
 }
 #instructions li {
   margin-left: 40px;
   margin-bottom: 10px;
-}
-#instructions h1 {
-  font-family: "Permanent Marker", cursive;
 }
 
 #closeInstructions {
@@ -92,10 +103,27 @@ footer img:hover {
   padding: 5px;
 }
 
+#gameOverPopup {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(43, 43, 84, 0.8);
+  display: none;
+}
+#gameOverPopup div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
 button {
   background-color: #B4C5E4;
-  color: #2C2C54;
-  border: #2C2C54;
+  color: #2B2B54;
+  border: #B4C5E4 solid 1px;
   font-weight: bold;
   padding: 5px 10px;
   border-radius: 10px;
@@ -104,8 +132,9 @@ button {
 }
 
 button:hover {
-  background-color: #2C2C54;
+  background-color: #2B2B54;
   color: #FBFFF1;
+  border: #FBFFF1 solid 1px;
 }
 
 .buttons {

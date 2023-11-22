@@ -6,7 +6,7 @@
 // Variables for styles
 $heading-font: 'Permanent Marker', cursive;
 $body-font: 'Indie Flower', cursive;
-$dark-blue: #2C2C54;
+$dark-blue: #2B2B54;
 $light-blue: #B4C5E4;
 $ivory: #FBFFF1;
 
@@ -30,7 +30,7 @@ $ivory: #FBFFF1;
 @mixin button-style {
   background-color: $light-blue;
   color: $dark-blue;
-  border: $dark-blue;
+  border: $light-blue solid 1px;
   font-weight: bold;
   padding: 5px 10px;
   border-radius: 10px;
@@ -41,21 +41,17 @@ $ivory: #FBFFF1;
 @mixin button-style-hover {
   background-color: $dark-blue;
   color: $ivory;
+  border: $ivory solid 1px;
 }
 
 @mixin popup-style {
   position: fixed;
   z-index: 1000;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 350px;
-  background-color: $dark-blue;
-  color: $ivory;
-  padding: 20px;
-  border-radius: 10px;
-  border: 5px solid $light-blue;
-  box-shadow: 10px 5px 5px gray;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(43, 43, 84, 0.8);
 }
 
 @mixin close-popup {
@@ -107,6 +103,10 @@ footer{
   }
 }
 
+h1 {
+  font-family: $heading-font;
+}
+
 #hangmanImg {
   max-width: 330px;
   height: auto;
@@ -121,6 +121,21 @@ footer{
   margin: 10px;
 }
 
+.popupDiv {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 350px;
+  background-color: $dark-blue;
+  opacity: 1;
+  color: $ivory;
+  padding: 20px;
+  border-radius: 10px;
+  border: 5px solid $light-blue;
+  box-shadow: 10px 5px 5px gray;
+}
+
 #instructions {
   @include popup-style;
   display: none;
@@ -129,14 +144,22 @@ footer{
     margin-left: 40px;
     margin-bottom: 10px;
   }
-
-  h1 {
-    font-family: $heading-font;
-  }
 }
 
 #closeInstructions {
   @include close-popup;
+}
+
+#gameOverPopup {
+  @include popup-style;
+  display: none;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
 }
 
 button {

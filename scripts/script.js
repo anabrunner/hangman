@@ -9,14 +9,18 @@ const $hintDiv = $('#hint');
 const $letterKeys = $('#letterKeys');
 const $instructions = $('#instructions');
 const $closeInstructionsBtn = $('#closeInstructions');
+const $gameOver = $('#gameOverPopup');
+const $finalScore = $('#finalScore');
+const $playAgainBtn = $('#playAgain');
 const fetchWordURL = 'https://www.wordgamedb.com/api/v1/words/random';
 let playerScore;
 let incorrectGuesses;
 let currentWord;
 
-$howToPlayBtn.click(() => $instructions.show(300));
-$closeInstructionsBtn.click(() => $instructions.hide(300));
+$howToPlayBtn.click(() => $instructions.fadeIn(300));
+$closeInstructionsBtn.click(() => $instructions.fadeOut(300));
 $newGameBtn.click(startGame);
+$playAgainBtn.click(startGame);
 
 // Creates buttons for letters
 makeLetterKeys();
@@ -37,6 +41,7 @@ function startGame(){
   playerScore = 0;
   incorrectGuesses = 0;
   updateScore(playerScore);
+  $gameOver.fadeOut(300);
   $hangmanImg.attr('src', 'images/drawing/hangman-1');
   $letterKeys.children().each(function(){
     $(this).removeClass('disabled');
@@ -108,4 +113,6 @@ function gameOver(){
     $(this).addClass('disabled');
     $(this).prop('disabled', true);
   });
+  $finalScore.text(`Final score: ${playerScore}`);
+  $gameOver.fadeIn(300);
 };
