@@ -29,7 +29,9 @@ $playAgainBtn.click(startGame);
 // Add event listener for keyboard input
 $(window).keypress(function(e){
   let buttonID = String.fromCharCode(e.which).toUpperCase();
-  $(`#${buttonID}`).click();
+  if(!$(`#${buttonID}`).prop('disabled')){
+    $(`#${buttonID}`).click();
+  }
 });
 
 // Creates buttons for letters
