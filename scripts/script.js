@@ -52,7 +52,7 @@ function startGame(){
   gameState.incorrectGuesses = 0;
   updateScore(gameState.playerScore);
   $gameOver.fadeOut(300);
-  $hangmanImg.attr('src', 'images/drawing/hangman-1');
+  $hangmanImg.attr('src', 'images/drawing/hangman-1.png');
   $letterKeys.children().each(function(){
     $(this).removeClass('disabled');
     $(this).prop('disabled', false);
@@ -106,7 +106,7 @@ function makeGuess(){
 function validateGuess(arrayOfMatches, letter){
   if (arrayOfMatches.length === 0){
     gameState.incorrectGuesses++;
-    $hangmanImg.attr('src', `images/drawing/hangman-${gameState.incorrectGuesses + 1}`);
+    $hangmanImg.attr('src', `images/drawing/hangman-${gameState.incorrectGuesses + 1}.png`);
     if (gameState.incorrectGuesses === 6){
       gameOver();
     }
