@@ -14,15 +14,19 @@ const $finalScore = $('#finalScore');
 const $correctWord = $('#correctWord');
 const $playAgainBtn = $('#playAgain');
 const fetchWordURL = 'https://www.wordgamedb.com/api/v1/words/random';
-let playerScore;
-let incorrectGuesses;
-let currentWord;
+// Object to keep track of game state
+const gameState = {
+  playerScore: 0,
+  incorrectGuesses: 0,
+  currentWord: null
+};
 
 $howToPlayBtn.click(() => $instructions.fadeIn(300));
 $closeInstructionsBtn.click(() => $instructions.fadeOut(300));
 $newGameBtn.click(startGame);
 $playAgainBtn.click(startGame);
 
+// Add event listener for keyboard input
 $(window).keypress(function(e){
   let buttonID = String.fromCharCode(e.which).toUpperCase();
   $(`#${buttonID}`).click();
@@ -44,9 +48,9 @@ function makeLetterKeys(){
 };
 
 function startGame(){
-  playerScore = 0;
-  incorrectGuesses = 0;
-  updateScore(playerScore);
+  gameState.playerScore = 0;
+  gameState.incorrectGuesses = 0;
+  updateScore(gameState.playerScore);
   $gameOver.fadeOut(300);
   $hangmanImg.attr('src', 'images/drawing/hangman-1');
   $letterKeys.children().each(function(){
@@ -64,9 +68,9 @@ function getRandomWord(){
       }
     })
     .then(function(data){
-      currentWord = data.word.toUpperCase();
+      gameState.currentWord = data.word.toUpperCase();
       $hintDiv.text(`HINT: ${data.category} - ${data.hint}`);
-      makeWordDiv(currentWord);
+      makeWordDiv(gameState.currentWord);
     })
     .catch(function(){
       console.log('Catch fetch error');
@@ -89,8 +93,8 @@ function updateScore(score){
 function makeGuess(){
   let guess = $(this).attr('id');
   let matches = [];
-  for (let i = 0; i < currentWord.length; i++){
-    if (currentWord[i] === guess) {
+  for (let i = 0; i < gameState.currentWord.length; i++){
+    if (gameState.currentWord[i] === guess) {
       matches.push(i);
     }
   }
@@ -101,9 +105,9 @@ function makeGuess(){
 
 function validateGuess(arrayOfMatches, letter){
   if (arrayOfMatches.length === 0){
-    incorrectGuesses++;
-    $hangmanImg.attr('src', `images/drawing/hangman-${incorrectGuesses + 1}`);
-    if (incorrectGuesses === 6){
+    gameState.incorrectGuesses++;
+    $hangmanImg.attr('src', `images/drawing/hangman-${gameState.incorrectGuesses + 1}`);
+    if (gameState.incorrectGuesses === 6){
       gameOver();
     }
   } else {
@@ -111,8 +115,8 @@ function validateGuess(arrayOfMatches, letter){
       $(`#word div:nth-child(${arrayOfMatches[i] + 1})`).text(`${letter}`);
     }
     if (!$wordDiv.children().is(':empty')){
-      playerScore++;
-      updateScore(playerScore);
+      gameState.playerScore++;
+      updateScore(gameState.playerScore);
       $letterKeys.children().each(function(){
         $(this).removeClass('disabled');
         $(this).prop('disabled', false);
@@ -127,7 +131,7 @@ function gameOver(){
     $(this).addClass('disabled');
     $(this).prop('disabled', true);
   });
-  $correctWord.text(`The correct word was ${currentWord}.`);
-  $finalScore.text(`Final score: ${playerScore}`);
+  $correctWord.text(`The correct word was ${gameState.currentWord}.`);
+  $finalScore.text(`Final score: ${gameState.playerScore}`);
   $gameOver.fadeIn(300);
 };
