@@ -11,38 +11,30 @@ $light-blue: #B4C5E4;
 $ivory: #FBFFF1;
 
 // Mixins
-@mixin layout-style {
-  padding: 10px;
-  background-color: $dark-blue;
-  color: $ivory;
-  width: 100%;
-  text-align: center;
-}
-
-@mixin flex-layout-spacing {
+@mixin flex-layout($direction, $justify, $align) {
   display: flex;
-  justify-content: space-around;
-  flex: 1;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
   gap: 10px;
+}
+
+@mixin layout-style($pad, $bkcolor, $color, $font) {
+  padding: $pad;
+  background-color: $bkcolor;
+  color: $color;
+  font-family: $font;
+}
+
+@mixin border-style($radius, $border) {
+  border-radius: $radius;
+  border: $border;
+}
+
+@mixin sizing($width) {
   width: 100%;
-  margin: 10px;
-}
-
-@mixin button-style {
-  background-color: $light-blue;
-  color: $dark-blue;
-  border: $light-blue solid 1px;
-  font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 10px;
-  font-family: $body-font;
-  font-size: 20rem;
-}
-
-@mixin button-style-hover {
-  background-color: $dark-blue;
-  color: $ivory;
-  border: $ivory solid 1px;
+  height: auto;
+  max-width: $width;
 }
 
 @mixin popup-style {
@@ -55,45 +47,33 @@ $ivory: #FBFFF1;
   background-color: rgba(43, 43, 84, 0.8);
 }
 
-@mixin close-popup {
-  align-self: center;
-  padding: 5px;
-}
-
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  font-family: $body-font;
-  background-color: $light-blue;
+  @include flex-layout(column, space-between, center);
+  @include layout-style(0px, $light-blue, $dark-blue, $body-font);
   min-height: 100vh;
 }
 
 header {
-  @include layout-style;
-  font-family: $heading-font;
+  @include layout-style(10px, $dark-blue, $ivory, $heading-font);
+  @include sizing(100vw);
   font-size: 50rem;
+  text-align: center;
 }
 
 main {
-  background-color: white;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 1;
-  align-items: center;
-  padding: 20px;
-  max-width: 500px;
-  margin: 20px;
+  @include flex-layout(column, left, center);
+  @include layout-style(20px, white, black, $body-font);
+  @include sizing(500px);
+  @include border-style(10px, none);
 }
 
 footer{
-  @include layout-style;
+  @include layout-style(10px, $dark-blue, $ivory, $body-font);
+  @include sizing(100vw);
+  text-align: center;
 
   img {
-    width: 15px;
-    height: auto;
+    @include sizing(15px);
   }
 
   img:hover {
@@ -106,84 +86,51 @@ h1 {
   font-family: $heading-font;
 }
 
-#hangmanImg {
-  width: 100%;
-  max-width: 330px;
-  height: auto;
-  margin-top: 10px;
-  flex-shrink: 1;
-}
-
-#letterKeys {
-  display: flex;
-  flex-flow: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin: 10px;
-}
-
-.popupDiv {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 450px;
-  background-color: $dark-blue;
-  opacity: 1;
-  color: $ivory;
-  padding: 20px;
-  border-radius: 10px;
-  border: 5px solid $light-blue;
-  box-shadow: 10px 5px 5px gray;
-}
-
-#instructions {
-  @include popup-style;
-  display: none;
-
-  li {
-    margin-left: 40px;
-    margin-bottom: 10px;
-  }
-}
-
-#closeInstructions {
-  @include close-popup;
-}
-
-#gameOverPopup {
-  @include popup-style;
-  display: none;
-
-  div {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-  }
-}
-
 button {
-  @include button-style;
+  @include layout-style(5px 10px, $light-blue, $dark-blue, $body-font);
+  @include border-style(10px, 1px solid $light-blue);
+  font-weight: bold;
+  font-size: 20rem;
 }
 
 button:hover {
-  @include button-style-hover()
+  @include layout-style(5px 10px, $dark-blue, $ivory, $body-font);
+  @include border-style(10px, 1px solid $ivory);
+}
+
+.disabled, .disabled:hover {
+  background-color: gray;
+  color: $ivory;
 }
 
 .buttons {
-  @include flex-layout-spacing;
+  @include flex-layout(row, space-around, center);
+  width: 100%;
+}
+
+.popupDiv {
+  @include flex-layout(column, space-around, left);
+  @include layout-style(20px, $dark-blue, $ivory, $body-font);
+  @include border-style(10px, 5px solid $light-blue);
+  @include sizing(450px);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  box-shadow: 10px 5px 5px gray;
 }
 
 #score {
   font-size: 30rem;
 }
 
+#hangmanImg {
+  @include sizing(330px);
+}
+
 #word {
-  @include flex-layout-spacing;
+  @include flex-layout(row, space-between, center);
 
   div {
     border-bottom: 3px solid black;
@@ -198,9 +145,33 @@ button:hover {
   text-align: center;
 }
 
-.disabled, .disabled:hover {
-  background-color: gray;
-  color: $ivory;
+#letterKeys {
+  @include flex-layout(row, center, center);
+  flex-flow: wrap;
+}
+
+#instructions {
+  @include popup-style;
+  display: none;
+
+  li {
+    margin-left: 40px;
+    margin-bottom: 10px;
+  }
+}
+
+#closeInstructions {
+  align-self: center;
+  padding: 5px;
+}
+
+#gameOverPopup {
+  @include popup-style;
+  display: none;
+
+  div {
+    @include flex-layout(column, space-around, center);
+  }
 }
 
 @media screen and (max-width:500px) {
