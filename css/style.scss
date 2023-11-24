@@ -130,7 +130,8 @@ button:hover {
 }
 
 #word {
-  @include flex-layout(row, space-between, center);
+  @include flex-layout(row, center, center);
+  flex-flow: wrap;
 
   div {
     border-bottom: 3px solid black;

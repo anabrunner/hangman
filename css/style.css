@@ -136,9 +136,10 @@ button:hover {
 #word {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 10px;
+  flex-flow: wrap;
 }
 #word div {
   border-bottom: 3px solid black;
